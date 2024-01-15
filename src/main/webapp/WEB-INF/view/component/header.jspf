@@ -31,7 +31,7 @@ form-control:focus {
 </head>
 <body>
 	<nav class="navbar bg-body-tertiary sticky-top"
-		data-bs-theme="${empty sessionScope.logonAccount ? 'light' : 'dar	k'}">
+		data-bs-theme="${empty sessionScope.logonAccount ? 'light' : 'dark'}">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="${contextPath }/index"><i class="bi bi-rocket-takeoff-fill"></i>퀵챗</a> <a
 				class="navbar-toggler border border-0" type="button"

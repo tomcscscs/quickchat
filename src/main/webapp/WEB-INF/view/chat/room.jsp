@@ -6,6 +6,20 @@
 <div class="container mt-3 d-flex flex-column g-0 "
 	style="position: relative; height: 85vh">
 	<!-- 상품목록 고정 영역 -->
+	<div class="d-flex gap-1 align-items-center">
+								<img
+									src="${fn:startsWith(sessionScope.logonAccount.profileImageUrl, 'http') ? '': contextPath }${sessionScope.logonAccount.profileImageUrl }"
+									width="42" height="42" class="rounded-circle" />
+								<h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+									${sessionScope.logonAccount.nickname }</h5>
+								<span class="badge" style="background-color: #FEE500;">${sessionScope.logonAccount.platform }</span>
+							</div>
+	
+	
+	
+	
+	
+	
 	<div
 		style="position: absolute; cursor: pointer; top: 0; width: 100%; z-index: 10;"
 		class="bg-dark text-white d-flex p-2 align-items-center gap-2 rounded-1"
