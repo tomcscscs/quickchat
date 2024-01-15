@@ -23,7 +23,7 @@ public class KakaoAPIService {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("grant_type", "authorization_code");
 		body.add("client_id", "7ab771b649c094c990041f78323bcfd1");
-		body.add("redirect_uri", "http://192.168.151.10:8080/quickchat/callback/kakao");
+		body.add("redirect_uri", "http://192.168.1.5:8080/quickchat/callback/kakao");
 		body.add("code", code);
 
 		var request = new RequestEntity<>(body, headers, HttpMethod.POST,

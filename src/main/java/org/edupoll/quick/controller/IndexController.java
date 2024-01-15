@@ -35,7 +35,7 @@ public class IndexController {
 		kakaoLoginLink += "&redirect_uri=${redirect_uri}";
 
 		String clientId = "7ab771b649c094c990041f78323bcfd1";
-		String redirectURI = "http://192.168.151.10:8080${contextPath}/callback/kakao".replace("${contextPath}",
+		String redirectURI = "http://192.168.1.5:8080${contextPath}/callback/kakao".replace("${contextPath}",
 				application.getContextPath());
 
 		kakaoLoginLink = kakaoLoginLink.replace("${client_id}", clientId);
