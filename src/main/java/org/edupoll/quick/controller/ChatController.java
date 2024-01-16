@@ -28,76 +28,52 @@ import lombok.RequiredArgsConstructor;
 public class ChatController {
 	private final ChatsRepository chatsRepository;
 
-	
-	
-	
-	
+	@GetMapping("/chatroom")
+	public String chatRoom(Model model) {
 
+		return "chat/room";
 
-	
+	}
+
 	// 메시지 등록 처리하는 핸들러
 	@ResponseBody
 	@PostMapping("/room/{roomId}/message")
-	public String proceedAddChatMessage(@SessionAttribute Account logonAccount,
-			@PathVariable String roomId, @RequestParam String content
-			) {
-		
-		ChatMessage messages = ChatMessage.builder()	//
-					.chatRoomId(roomId).talkerId(logonAccount.getId()).content(content).build();
-		
+	public String proceedAddChatMessage(@SessionAttribute Account logonAccount, @PathVariable String roomId,
+			@RequestParam String content) {
+
+		ChatMessage messages = ChatMessage.builder() //
+				.chatRoomId(roomId).talkerId(logonAccount.getId()).content(content).build();
+
 		chatsRepository.saveChatMessage(messages);
-		
+
 		Gson gson = new Gson();
 		Map<String, Object> response = new HashMap<>();
 		response.put("result", "success");
-		
+
 		return gson.toJson(response);
 	}
-	
-	
+
 	// 특정 시점이후의 메시지 목록을 전송하는 핸들러
-	
-	@GetMapping(
-			path = "/room/{roomId}/latest",
-			produces = "text/plain;charset=utf-8"
-			)
+
+	@GetMapping(path = "/room/{roomId}/latest", produces = "text/plain;charset=utf-8")
 	@ResponseBody
-	public String proceedFindLatestMessage(@PathVariable String roomId, 
-			@RequestParam int lastMessageId, @SessionAttribute Account logonAccount) {
+	public String proceedFindLatestMessage(@PathVariable String roomId, @RequestParam int lastMessageId,
+			@SessionAttribute Account logonAccount) {
 		Map<String, Object> criteria = new HashMap<>();
 		criteria.put("roomId", roomId);
 		criteria.put("lastMessageId", lastMessageId);
 		List<ChatMessage> list = chatsRepository.findAfterChatMessageByRoomId(criteria);
-		
+
 		criteria.clear();
 		criteria.put("roomId", roomId);
 		criteria.put("logonAccountId", logonAccount.getId());
 		chatsRepository.updateCheckAtByRoomId(criteria);
 
-		
-		
 		Map<String, Object> response = new HashMap<>();
 		response.put("result", "success");
 		response.put("messages", list);
 		Gson gson = new Gson();
 		return gson.toJson(response);
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

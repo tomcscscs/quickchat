@@ -33,7 +33,13 @@ form-control:focus {
 	<nav class="navbar bg-body-tertiary sticky-top"
 		data-bs-theme="${empty sessionScope.logonAccount ? 'light' : 'dark'}">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="${contextPath }/index"><i class="bi bi-rocket-takeoff-fill"></i>퀵챗</a> <a
+			<a class="navbar-brand d-flex align-items-center"
+				href="${contextPath}/index"> <i
+				class="bi bi-rocket-takeoff-fill"
+				style="font-size: 24px; color: white; margin-right: 5px;"></i>
+				<h4
+					style="font-family: 'Lemon', serif; font-size: 40px; color: white; margin: 0;">QuickChat</h4>
+			</a> <a
 				class="navbar-toggler border border-0" type="button"
 				data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
 				aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -90,17 +96,7 @@ form-control:focus {
 						</c:when>
 						<c:otherwise>
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="${contextPath }/settings"><i
-										class="bi bi-person-gear"></i> 내 정보</a></li>
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="${contextPath }/product/register"><i
-										class="bi bi-pen"></i> 내 물건팔기</a></li>
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="${contextPath }/my/picks"><i
-										class="bi bi-bookmark-heart-fill"></i> 관심목록</a></li>
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="${contextPath }/chat/list"><i class="bi bi-info-square"></i> 문의목록</a></li>
+								
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="${contextPath }/signout"><i
 										class="bi bi-x"></i> 로그아웃</a></li>

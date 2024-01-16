@@ -2,11 +2,67 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="/WEB-INF/view/component/header.jspf"%>
-<div class="container mt-3 d-flex flex-column g-0 "
-	style="position: relative; height: 85vh">
-	<!-- 상품목록 고정 영역 -->
-	<div class="d-flex gap-1 align-items-center">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="contextPath"
+	value="${pageContext.servletContext.contextPath }" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>퀵챗</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Lemon&family=Noto+Sans+KR:wght@500&display=swap"
+	rel="stylesheet">
+
+
+
+<style>
+form-control:focus {
+	box-shadow: none;
+}
+</style>
+</head>
+<body>
+
+	<nav class="navbar bg-body-tertiary sticky-top"
+		data-bs-theme="${empty sessionScope.logonAccount ? 'light' : 'dark'}">
+		<div class="container-fluid">
+			<a class="navbar-brand d-flex align-items-center"
+				href="${contextPath}/index"> <i
+				class="bi bi-rocket-takeoff-fill"
+				style="font-size: 24px; color: white; margin-right: 5px;"></i>
+				<h4
+					style="font-family: 'Lemon', serif; font-size: 40px; color: white; margin: 0;">QuickChat</h4>
+			</a><a class="navbar-toggler border border-0" type="button"
+				data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+				aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+				<c:choose>
+					<c:when test="${empty sessionScope.logonAccount }">
+						<span class="bi bi-person-slash"></span>
+					</c:when>
+					<c:otherwise>
+						<span class="bi bi-person-circle"></span>
+					</c:otherwise>
+				</c:choose>
+			</a>
+			<div class="offcanvas offcanvas-end" tabindex="-1"
+				id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+				<div class="offcanvas-header">
+					<c:choose>
+						<c:when test="${empty sessionScope.logonAccount }">
+							<h5 class="offcanvas-title" id="offcanvasNavbarLabel">퀵챗</h5>
+						</c:when>
+						<c:otherwise>
+							<div class="d-flex gap-1 align-items-center">
 								<img
 									src="${fn:startsWith(sessionScope.logonAccount.profileImageUrl, 'http') ? '': contextPath }${sessionScope.logonAccount.profileImageUrl }"
 									width="42" height="42" class="rounded-circle" />
@@ -14,23 +70,27 @@
 									${sessionScope.logonAccount.nickname }</h5>
 								<span class="badge" style="background-color: #FEE500;">${sessionScope.logonAccount.platform }</span>
 							</div>
-	
-	
-	
-	
-	
-	
-	<div
-		style="position: absolute; cursor: pointer; top: 0; width: 100%; z-index: 10;"
-		class="bg-dark text-white d-flex p-2 align-items-center gap-2 rounded-1"
-		onclick="location.href='${contextPath }/product/${product.id }'">
-		<img src="${contextPath }${product.images[0].url }" width="64"
-			height="64" /> <span>${product.title }</span> <small><fmt:formatNumber
-				pattern="#,###" value="${product.price }" />원</small>
-	</div>
+						</c:otherwise>
+					</c:choose>
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+						aria-label="Close"></button>
+				</div>
+
+			</div>
+		</div>
+	</nav>
+
+
+
+
+
+
+
+
 	<!-- 채팅내용 뿌려지는 영역 -->
 	<div class="flex-grow-1 px-1"
-		style="overflow: auto; z-index: 1; margin-top: 80px; margin-bottom:40px;" id="chatView">
+		style="overflow: auto; z-index: 1; margin-top: 80px; margin-bottom: 40px;"
+		id="chatView">
 		<div id="0"></div>
 		<c:forEach items="${chatMessages }" var="one" varStatus="status">
 			<c:choose>
@@ -61,7 +121,8 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${one.talkerId eq sessionScope.logonAccount.id }">
-					<div id="${one.id }" class="d-flex justify-content-end my-1 align-items-end gap-1 ">
+					<div id="${one.id }"
+						class="d-flex justify-content-end my-1 align-items-end gap-1 ">
 						<div>
 							<c:if test="${one.checkedAt eq null }">
 								<div style="font-size: xx-small;">안읽음</div>
@@ -74,12 +135,12 @@
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div  id="${one.id }"
+					<div id="${one.id }"
 						class="d-flex justify-content-start  my-1 align-items-end gap-1">
 						<div class="card px-2 py-1" style="background-color: aliceblue">${one.content }</div>
 						<div>
 							<span style="font-size: xx-small;"><fmt:formatDate
-								pattern="a hh:mm" value="${one.sentAt }" /></span>
+									pattern="a hh:mm" value="${one.sentAt }" /></span>
 						</div>
 					</div>
 				</c:otherwise>
@@ -93,8 +154,8 @@
 			<i class="bi bi-send"></i>
 		</button>
 	</div>
-</div>
-<script>
+	</div>
+	<script>
 	document.querySelector("#chatView").scrollTop = document.querySelector("#chatView").scrollHeight;
 	
 	// console.log(document.querySelector("#chatView").scrollHeight);
@@ -128,7 +189,7 @@
 		}
 	}
 </script>
-<script>
+	<script>
 	var logonAccountId = '${sessionScope.logonAccount.id}';
 	// 추가된 최신 메시지 얻어오는 AJAX 함수
 	
@@ -179,14 +240,4 @@
 	setInterval(getLatestMessage, 1000);
 	
 </script>
-<%@ include file="/WEB-INF/view/component/footer.jspf"%>
-
-
-
-
-
-
-
-
-
-
+	<%@ include file="/WEB-INF/view/component/footer.jspf"%>

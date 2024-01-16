@@ -70,7 +70,7 @@ public class IndexController {
 			session.setAttribute("logonAccount", account);
 		}
 		
-		return "/chat/room";
+		return "redirect:/chat/chatroom";
 		
 	}
 	
