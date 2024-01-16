@@ -165,7 +165,7 @@ form-control:focus {
 		const value = document.querySelector("#msg").value;
 		if (value) {
 			const xhr = new XMLHttpRequest();
-			xhr.open("POST", "${contextPath}/chat/room/${chatRoom.id}/message",
+			xhr.open("POST", "${contextPath}/chat/room/0/message",
 					true);
 
 			xhr.setRequestHeader("content-type",
@@ -198,7 +198,7 @@ form-control:focus {
 		
 		
 		const xhr = new XMLHttpRequest();
-		xhr.open("GET", "${contextPath}/chat/room/${chatRoom.id}/latest?lastMessageId="+id);
+		xhr.open("GET", "${contextPath}/chat/room/${0}/latest?lastMessageId="+id);
 		xhr.onreadystatechange=function() {
 			if(xhr.readyState==4) {
 				var response = JSON.parse(xhr.responseText);

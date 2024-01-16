@@ -35,6 +35,9 @@ public class ChatController {
 
 	}
 
+	
+	
+	
 	// 메시지 등록 처리하는 핸들러
 	@ResponseBody
 	@PostMapping("/room/{roomId}/message")
@@ -53,6 +56,12 @@ public class ChatController {
 		return gson.toJson(response);
 	}
 
+	
+	
+	
+	
+	
+	
 	// 특정 시점이후의 메시지 목록을 전송하는 핸들러.
 
 	@GetMapping(path = "/room/{roomId}/latest", produces = "text/plain;charset=utf-8")
@@ -75,5 +84,8 @@ public class ChatController {
 		Gson gson = new Gson();
 		return gson.toJson(response);
 	}
+	
+	
+	
 
 }
