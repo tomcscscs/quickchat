@@ -98,7 +98,7 @@ form-control:focus {
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 								
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="${contextPath }/signout"><i
+									aria-current="page" href="${contextPath }/logout"><i
 										class="bi bi-x"></i> 로그아웃</a></li>
 							</ul>
 						</c:otherwise>
