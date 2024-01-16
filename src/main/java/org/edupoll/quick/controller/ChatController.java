@@ -53,7 +53,7 @@ public class ChatController {
 		return gson.toJson(response);
 	}
 
-	// 특정 시점이후의 메시지 목록을 전송하는 핸들러
+	// 특정 시점이후의 메시지 목록을 전송하는 핸들러.
 
 	@GetMapping(path = "/room/{roomId}/latest", produces = "text/plain;charset=utf-8")
 	@ResponseBody

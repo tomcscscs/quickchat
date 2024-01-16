@@ -100,7 +100,7 @@ form-control:focus {
 					<div
 						class="d-flex justify-content-center my-1 align-items-end gap-1 ">
 						<div class="card px-2 py-1 bg-secondary text-white">
-							<small>${now }</small>
+							<small>${now}</small>
 						</div>
 					</div>
 				</c:when>
