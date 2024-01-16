@@ -88,8 +88,8 @@ form-control:focus {
 
 
 	<!-- 채팅내용 뿌려지는 영역 -->
-	<div class="flex-grow-1 px-1"
-		style="overflow: auto; z-index: 1; margin-top: 80px; margin-bottom: 40px;"
+	<div class="px-1"
+		style="overflow: auto; z-index: 0; margin-top: 80px; margin-bottom: 40px;"
 		id="chatView">
 		<div id="0"></div>
 		<c:forEach items="${chatMessages }" var="one" varStatus="status">
@@ -147,14 +147,13 @@ form-control:focus {
 			</c:choose>
 		</c:forEach>
 	</div>
-	<div style="position: absolute; bottom: 0; z-index: 10; width: 100%"
-		class="input-group">
+	<div class="fixed-bottom input-group bg-dark" style="z-index:9">
 		<input type="text" class="form-control form-control-sm" id="msg" />
 		<button class="btn btn-outline-secondary" type="button" id="sendBt">
 			<i class="bi bi-send"></i>
 		</button>
 	</div>
-	</div>
+	
 	<script>
 	document.querySelector("#chatView").scrollTop = document.querySelector("#chatView").scrollHeight;
 	
