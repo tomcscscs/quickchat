@@ -1,5 +1,6 @@
 package org.edupoll.quick.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.UUID;
 
 import org.edupoll.quick.model.Account;
 import org.edupoll.quick.model.ChatMessage;
+import org.edupoll.quick.model.RoomList;
 import org.edupoll.quick.repository.ChatsRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +37,6 @@ public class ChatController {
 
 	}
 
-	
-	
-	
 	// 메시지 등록 처리하는 핸들러
 	@ResponseBody
 	@PostMapping("/room/{roomId}/message")
@@ -56,12 +55,6 @@ public class ChatController {
 		return gson.toJson(response);
 	}
 
-	
-	
-	
-	
-	
-	
 	// 특정 시점이후의 메시지 목록을 전송하는 핸들러.
 
 	@GetMapping(path = "/room/{roomId}/latest", produces = "text/plain;charset=utf-8")
@@ -84,7 +77,57 @@ public class ChatController {
 		Gson gson = new Gson();
 		return gson.toJson(response);
 	}
+
+	@PostMapping("/saveRoom")
+	public String chatRoomListCreate(@SessionAttribute Account logonAccount, @RequestParam String inputTitle) {
+
+		RoomList one = RoomList.builder().title(inputTitle).openerName(logonAccount.getNickname())
+				.userId(logonAccount.getId()).build();
+		chatsRepository.saveRoomList(one);
+
+		return "redirect:/chat/showLoginIndex";// 로그인 페이지로의 경로를 설정하고 나서 추후에 이어서 이 경로를 활성화 시켜야 겠습니다. 
+
+	}
 	
+	/*
+	 * @GetMapping("/setAllRoom") public String chatRoomListBring(Model model) {
+	 * List<RoomList> list = chatsRepository.findAllChatListByRoomId();
+	 * model.addAttribute("setAllRoomList", list);
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * return "/private/index";
+	 * 
+	 * }
+	 */
+	
+	@GetMapping("/showLoginIndex")
+	public String chatRoomListBring(Model model) {
+		List<RoomList> list	= chatsRepository.findAllChatListByRoomId();
+		model.addAttribute("setAllRoomList", list);
+		
+		
+		
+		
+		
+		return "private/index";
+		
+	}
+	
+	
+	@GetMapping("/inputDataPageForChatRoom")
+	public String MakeForChatRoom(Model model) {
+		
+		
+		
+		
+		
+		
+		return "/private/roomForm";
+		
+	}
 	
 	
 

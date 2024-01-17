@@ -36,5 +36,24 @@
 				SET CHECKED_AT=sysdate 
 			WHERE CHAT_ROOM_ID=#{roomId} AND TALKER_ID != #{logonAccountId} AND CHECKED_AT IS NULL
 	</update>
+	<insert id="saveRoomList">
+	insert into room_lists values (room_lists_seq.nextval, sysdate, #{title}, #{openerName}, #{userId})
+	</insert>
+	
+	<select id="findAllChatListByRoomId">
+	select * from room_lists
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
 

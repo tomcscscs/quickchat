@@ -12,6 +12,7 @@
 		<div class="card-body d-flex flex-column justify-content-between">
 			<h5 class="card-title " style="word-break: keep-all; font-family:font-family: 'Noto Sans KR', sans-serif;">카카오로 입장하기.</h5>
 			<div class="card-text text-center">
+			
 				<p
 					style="border-radius: 12px; background-color: #FEE500; cursor: pointer;"
 					onclick="location.href='${kakaoLoginLink}'">
